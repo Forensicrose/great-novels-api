@@ -39,7 +39,7 @@ deletedAt DATETIME,
 PRIMARY KEY(id)
 );
 
-CREATE TABLE novelsgenres (
+CREATE TABLE novelsGenres (
 id INT auto_increment,
 novelsId INT,
 genresId INT,
@@ -134,7 +134,7 @@ INSERT INTO novelsGenres (novelsId, genresId) VALUES (8, 13)
 INSERT INTO novelsGenres (novelsId, genresId) VALUES (8, 14)
 INSERT INTO novelsGenres (novelsId, genresId) VALUES (9, 1)
 INSERT INTO novelsGenres (novelsId, genresId) VALUES (9, 2)
-INSERT INTO novelsGenres (novelsId, genresId) VALUES (9, 2)
+INSERT INTO novelsGenres (novelsId, genresId) VALUES (9, 4)
 INSERT INTO novelsGenres (novelsId, genresId) VALUES (9, 14)
 INSERT INTO novelsGenres (novelsId, genresId) VALUES (10, 1)
 INSERT INTO novelsGenres (novelsId, genresId) VALUES (10, 9)
