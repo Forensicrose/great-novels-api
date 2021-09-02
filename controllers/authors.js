@@ -9,4 +9,19 @@ const getAuthors = async (request, response) => {
   return response.send(authors)
 }
 
-module.exports = { getAuthors }
+
+const getAuthorswithNovels = async (request, response) => {
+  const { id } = request.params
+
+  const author = await models.Authors.findOne({
+    where: { id },
+    include: [{ model: models.Novels }]
+  })
+
+  return author
+    ? response.send(author)
+    : response.sendStatus(404)
+}
+
+
+module.exports = { getAuthors, getAuthorswithNovels }
