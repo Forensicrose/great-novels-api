@@ -1,12 +1,11 @@
 const express = require('express')
 const app = express()
 
+const { getAuthors, villainBySlug, newVillain } = require('./controllers/authors')
 
-app.use = express.json()
+app.use(express.json())
 
-
-
-
+app.get('/authors', getAuthors)
 
 
 
