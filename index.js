@@ -1,7 +1,7 @@
 const express = require('express')
 const app = express()
 
-const { getAuthors, getAuthorswithNovels, newVillain } = require('./controllers/authors')
+const { getAuthors, getAuthorswithNovels } = require('./controllers/authors')
 
 app.use(express.json())
 

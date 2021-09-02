@@ -15,7 +15,10 @@ const getAuthorswithNovels = async (request, response) => {
 
   const author = await models.Authors.findOne({
     where: { id },
-    include: [{ model: models.Novels }]
+    include: [{
+      model: models.Novels,
+      include: { model: models.Genres }
+    }]
   })
 
   return author
