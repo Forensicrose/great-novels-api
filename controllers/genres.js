@@ -24,3 +24,4 @@ const getGenreWithAllNovels = async (request, response) => {
 
 
 module.exports = { getAllGenres, getGenreWithAllNovels }
+
