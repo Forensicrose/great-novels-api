@@ -8,19 +8,23 @@ const getAllAuthors = async (request, response) => {
 
 
 const getAuthorsByIdWithNovelsAndGenres = async (request, response) => {
-  const { id } = request.params
+  try {
+    const { id } = request.params
 
-  const author = await models.Authors.findOne({
-    where: { id },
-    include: [{
-      model: models.Novels,
-      include: { model: models.Genres }
-    }]
-  })
+    const author = await models.Authors.findOne({
+      where: { id },
+      include: [{
+        model: models.Novels,
+        include: { model: models.Genres }
+      }]
+    })
 
-  return author
-    ? response.send(author)
-    : response.sendStatus(404)
+    return author
+      ? response.send(author)
+      : response.sendStatus(404)
+  } catch (error) {
+    return response.status(500).send('Could not find entry. Please try again!')
+  }
 }
 
 
