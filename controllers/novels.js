@@ -1,6 +1,6 @@
 const models = require('../models')
 
-const getNovelsWithAuthorsAndGenres = async (request, response) => {
+const getAllNovelsWithAuthorsAndGenres = async (request, response) => {
   const novels = await models.Novels.findAll({
     include: [{
       model: models.Authors
@@ -10,7 +10,7 @@ const getNovelsWithAuthorsAndGenres = async (request, response) => {
   return response.send(novels)
 }
 
-const getNovelWithAuthorGenre = async (request, response) => {
+const getNovelsByIdWithAuthorsAndGenres = async (request, response) => {
   const { id } = request.params
 
   const novel = await models.Novels.findOne({
@@ -25,5 +25,5 @@ const getNovelWithAuthorGenre = async (request, response) => {
     : response.sendStatus(404)
 }
 
-module.exports = { getNovelsWithAuthorsAndGenres, getNovelWithAuthorGenre }
+module.exports = { getAllNovelsWithAuthorsAndGenres, getNovelsByIdWithAuthorsAndGenres }
 

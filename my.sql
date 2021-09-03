@@ -135,7 +135,7 @@ INSERT INTO novelsGenres (novelId, genreId) VALUES (9, 4);
 INSERT INTO novelsGenres (novelId, genreId) VALUES (9, 14);
 INSERT INTO novelsGenres (novelId, genreId) VALUES (10, 1);
 INSERT INTO novelsGenres (novelId, genreId) VALUES (10, 9);
-INSERT INTO novelsGenres (novelId, genreId) VALUES (10, 13);
+INSERT INTO novelsGenres (novelId, genreId) VALUES (10, 14);
 INSERT INTO novelsGenres (novelId, genreId) VALUES (11, 1);
 INSERT INTO novelsGenres (novelId, genreId) VALUES (11, 14);
 INSERT INTO novelsGenres (novelId, genreId) VALUES (12, 1);
@@ -155,3 +155,4 @@ SELECT * FROM authors;
 SELECT * FROM novels;
 SELECT * FROM genres;
 SELECT * FROM novelsGenres;
+
