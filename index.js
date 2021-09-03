@@ -3,7 +3,8 @@ const app = express()
 
 const { getAuthors, getAuthorswithNovels } = require('./controllers/authors')
 const { getAllGenres, getGenreWithAllNovels } = require('./controllers/genres')
-const { getNovelsWithAuthorsAndGenres } = require('./controllers/novels')
+const { getNovelsWithAuthorsAndGenres, getNovelWithAuthorGenre } = require('./controllers/novels')
+
 
 
 app.use(express.json())
@@ -19,6 +20,7 @@ app.get('/genres/:id', getGenreWithAllNovels)
 
 app.get('/novels', getNovelsWithAuthorsAndGenres)
 
+app.get('/novels/:id', getNovelWithAuthorGenre)
 
 app.listen(1337, () => {
   // eslint-disable-next-line no-console
