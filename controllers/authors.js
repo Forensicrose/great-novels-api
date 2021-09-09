@@ -7,35 +7,23 @@ const getAllAuthors = async (request, response) => {
 }
 
 
-const getAuthorsByIdWithNovelsAndGenres = async (request, response) => {
-  try {
-    const { id } = request.params
-
-    const author = await models.Authors.findOne({
-      where: { id },
-      include: [{
-        model: models.Novels,
-        include: { model: models.Genres }
-      }]
-    })
-
-    return author
-      ? response.send(author)
-      : response.sendStatus(404)
-  } catch (error) {
-    return response.status(500).send('Could not find entry. Please try again!')
-  }
-}
-
-const getAuthorByLastname = async (req, res) => {
-  const { lastName } = req.params
+const getAuthorBySearchTerm = async (req, res) => {
+  const { searchTerm } = req.params
 
   const authorsName = await models.Authors.findOne({
-    where: { lastName: { [models.Op.like]: `%${lastName}%` } },
-    include: [{
-      model: models.Novels,
-      include: { model: models.Genres }
-    }]
+    where: {
+      [models.Op.or]: [
+        { id: searchTerm },
+        { lastName: { [models.Op.like]: `%${searchTerm}%` } },
+      ],
+    },
+    include: [
+      {
+        model: models.Novels,
+        include: [{ model: models.Genres }],
+      },
+    ],
+
   })
 
   return authorsName
@@ -44,4 +32,5 @@ const getAuthorByLastname = async (req, res) => {
 }
 
 
-module.exports = { getAllAuthors, getAuthorsByIdWithNovelsAndGenres, getAuthorByLastname }
+module.exports = { getAllAuthors, getAuthorBySearchTerm }
+
