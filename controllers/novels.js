@@ -10,24 +10,43 @@ const getAllNovelsWithAuthorsAndGenres = async (request, response) => {
   return response.send(novels)
 }
 
-const getNovelsByIdWithAuthorsAndGenres = async (request, response) => {
-  try {
-    const { id } = request.params
+// const getNovelsBySearchTerm = async (request, response) => {
+//   try {
+//     const { searchTerm } = request.params
 
-    const novel = await models.Novels.findOne({
-      where: { id },
-      include: [{ model: models.Authors },
-        { model: models.Genres }
-      ]
-    })
+//     const novel = await models.Novels.findOne({
+//       where: { id },
+//       include: [{ model: models.Authors },
+//         { model: models.Genres }
+//       ]
+//     })
 
-    return novel
-      ? response.send(novel)
-      : response.sendStatus(404)
-  } catch (error) {
-    return response.status(500).send('Could not find entry. Please try again!')
-  }
+//     return novel
+//       ? response.send(novel)
+//       : response.sendStatus(404)
+//   } catch (error) {
+//     return response.status(500).send('Could not find entry. Please try again!')
+//   }
+// }
+const getNovelBySearchTerm = async (req, res) => {
+  const { searchTerm } = req.params
+
+  const novel = await models.Novels.findOne({
+    where: {
+      [models.Op.or]: [
+        { id: searchTerm },
+        { title: { [models.Op.like]: `%${searchTerm}%` } },
+      ],
+    },
+    include: [{ model: models.Authors },
+      { model: models.Genres },
+    ]
+  })
+
+  return novel
+    ? res.send(novel)
+    : res.sendStatus(404)
 }
 
-module.exports = { getAllNovelsWithAuthorsAndGenres, getNovelsByIdWithAuthorsAndGenres }
+module.exports = { getAllNovelsWithAuthorsAndGenres, getNovelBySearchTerm }
 
