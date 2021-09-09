@@ -12,7 +12,7 @@ const getAuthorBySearchTerm = async (req, res) => {
   try {
     const { searchTerm } = req.params
 
-    const authorsName = await models.Authors.findOne({
+    const author = await models.Authors.findOne({
       where: {
         [models.Op.or]: [
           { id: searchTerm },
@@ -28,8 +28,8 @@ const getAuthorBySearchTerm = async (req, res) => {
 
     })
 
-    return authorsName
-      ? res.send(authorsName)
+    return author
+      ? res.send(author)
       : res.sendStatus(404)
   } catch (error) {
     return response.status(500).send('Could not find entry. Please try again!')
