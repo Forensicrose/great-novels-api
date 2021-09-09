@@ -27,5 +27,21 @@ const getAuthorsByIdWithNovelsAndGenres = async (request, response) => {
   }
 }
 
+const getAuthorByLastname = async (req, res) => {
+  const { lastName } = req.params
 
-module.exports = { getAllAuthors, getAuthorsByIdWithNovelsAndGenres }
+  const authorsName = await models.Authors.findOne({
+    where: { lastName: { [models.Op.like]: `%${lastName}%` } },
+    include: [{
+      model: models.Novels,
+      include: { model: models.Genres }
+    }]
+  })
+
+  return authorsName
+    ? res.send(authorsName)
+    : res.sendStatus(404)
+}
+
+
+module.exports = { getAllAuthors, getAuthorsByIdWithNovelsAndGenres, getAuthorByLastname }
